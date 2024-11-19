@@ -6,7 +6,7 @@ interface Heading2Props {
 
 export default function Heading2({ children }: Heading2Props) {
     return (
-        <h2 className="text-lg font-light leading-tight text-black">
+        <h2 className="text-black mb-5 text-xl font-light leading-tight">
             {children}
         </h2>
     );

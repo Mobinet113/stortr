@@ -1,27 +1,40 @@
+import Button from '@/Components/Common/Button';
+import Frame from '@/Components/Common/Frame';
+import Modal from '@/Components/Common/Modal';
+import FormNewDevice from '@/Components/Form/FormNewDevice';
 import Heading1 from '@/Components/Typography/Heading1';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function Dashboard() {
+    const [newDeviceOpen, setNewDeviceOpen] = useState(false);
+
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                <h2 className="text-gray-800 text-xl font-semibold leading-tight">
                     Dashboard
                 </h2>
             }
         >
             <Head title="Overview" />
 
-            <div className="px-10">
-                <div className="mx-auto">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <Heading1>Overview</Heading1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Frame>
+                <Heading1>Overview</Heading1>
+
+                <Button type="success" onClick={() => setNewDeviceOpen(true)}>
+                    Create new...
+                </Button>
+            </Frame>
+
+            <Modal
+                open={newDeviceOpen}
+                title="Create a new..."
+                onClose={() => setNewDeviceOpen(false)}
+            >
+                <FormNewDevice />
+            </Modal>
         </AuthenticatedLayout>
     );
 }

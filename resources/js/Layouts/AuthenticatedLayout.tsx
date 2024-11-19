@@ -14,7 +14,7 @@ export default function Authenticated({
         useState(false);
 
     return (
-        <div className="from-cream to-rose min-h-screen bg-gradient-to-b">
+        <div className="min-h-screen bg-gradient-to-b from-cream to-rose">
             <nav className="p-10">
                 <div className="rounded-md bg-white">
                     <div className="px-4 sm:px-6 lg:px-8">
@@ -22,35 +22,53 @@ export default function Authenticated({
                             <div className="flex">
                                 <div className="flex shrink-0 items-center">
                                     <Link href="/">
-                                        <ApplicationLogo className="block h-5 w-auto fill-current text-gray-800" />
+                                        <ApplicationLogo className="text-gray-800 block h-5 w-auto fill-current" />
                                     </Link>
                                 </div>
                             </div>
 
                             <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                                <div className="relative ms-3">
+                                <div className="relative ms-3 flex items-center">
+                                    <span className="mr-5 inline-flex rounded-md">
+                                        <button
+                                            type="button"
+                                            className="text-gray-500 hover:text-gray-700 inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-extralight leading-4 transition duration-150 ease-in-out focus:outline-none"
+                                        >
+                                            hi, {user.name}
+                                        </button>
+                                    </span>
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <span className="inline-flex rounded-md">
-                                                <button
-                                                    type="button"
-                                                    className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                            <button className="cursor-pointer">
+                                                <svg
+                                                    width="20"
+                                                    height="13"
+                                                    viewBox="0 0 20 13"
+                                                    fill="none"
                                                 >
-                                                    hello, {user.name}
-                                                    <svg
-                                                        className="-me-0.5 ms-2 h-4 w-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20"
-                                                        fill="currentColor"
-                                                    >
-                                                        <path
-                                                            fillRule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clipRule="evenodd"
-                                                        />
-                                                    </svg>
-                                                </button>
-                                            </span>
+                                                    <line
+                                                        y1="0.75"
+                                                        x2="20"
+                                                        y2="0.75"
+                                                        stroke="#4A4A4A"
+                                                        strokeWidth="0.5"
+                                                    />
+                                                    <line
+                                                        y1="6.75"
+                                                        x2="20"
+                                                        y2="6.75"
+                                                        stroke="#4A4A4A"
+                                                        strokeWidth="0.5"
+                                                    />
+                                                    <line
+                                                        y1="12.75"
+                                                        x2="20"
+                                                        y2="12.75"
+                                                        stroke="#4A4A4A"
+                                                        strokeWidth="0.5"
+                                                    />
+                                                </svg>
+                                            </button>
                                         </Dropdown.Trigger>
 
                                         <Dropdown.Content>
@@ -78,7 +96,7 @@ export default function Authenticated({
                                             (previousState) => !previousState,
                                         )
                                     }
-                                    className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                    className="text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 inline-flex items-center justify-center rounded-md p-2 transition duration-150 ease-in-out focus:outline-none"
                                 >
                                     <svg
                                         className="h-6 w-6"
@@ -129,12 +147,12 @@ export default function Authenticated({
                             </ResponsiveNavLink>
                         </div>
 
-                        <div className="border-t border-gray-200 pb-1 pt-4">
+                        <div className="border-gray-200 border-t pb-1 pt-4">
                             <div className="px-4">
-                                <div className="text-base font-medium text-gray-800">
+                                <div className="text-gray-800 text-base font-medium">
                                     {user.name}
                                 </div>
-                                <div className="text-sm font-medium text-gray-500">
+                                <div className="text-gray-500 text-sm font-medium">
                                     {user.email}
                                 </div>
                             </div>

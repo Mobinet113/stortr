@@ -8,7 +8,10 @@ import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function Dashboard() {
-    const [newDeviceOpen, setNewDeviceOpen] = useState(false);
+    const [deviceModal, setDeviceModal] = useState({
+        open: false,
+        title: 'Create a new...',
+    });
 
     return (
         <AuthenticatedLayout
@@ -23,17 +26,26 @@ export default function Dashboard() {
             <Frame>
                 <Heading1>Overview</Heading1>
 
-                <Button type="success" onClick={() => setNewDeviceOpen(true)}>
+                <Button
+                    type="success"
+                    onClick={() =>
+                        setDeviceModal({ ...deviceModal, open: true })
+                    }
+                >
                     Create new...
                 </Button>
             </Frame>
 
             <Modal
-                open={newDeviceOpen}
+                open={deviceModal.open}
                 title="Create a new..."
-                onClose={() => setNewDeviceOpen(false)}
+                onClose={() => setDeviceModal({ ...deviceModal, open: false })}
             >
-                <FormNewDevice />
+                <FormNewDevice
+                    onFinished={() =>
+                        setDeviceModal({ ...deviceModal, open: false })
+                    }
+                />
             </Modal>
         </AuthenticatedLayout>
     );

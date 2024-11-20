@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\SpaceController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -18,9 +19,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/spaces/new', function () {
-    return Inertia::render('Spaces/New');
-})->middleware(['auth', 'verified'])->name('spaces.new');
+Route::controller(SpaceController::class)->group(function () {
+    Route::post('/spaces', 'store')->name('spaces.store');
+})->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

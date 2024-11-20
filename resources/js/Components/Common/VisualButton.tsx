@@ -16,7 +16,7 @@ export default function VisualButton({
 }: VisualButtonProps) {
     return (
         <button
-            onClick={() => onClick}
+            onClick={onClick}
             className="border-black group relative aspect-square overflow-hidden rounded-md border p-3 text-left transition-colors duration-500 hover:bg-cream"
         >
             <div className="relative z-10">

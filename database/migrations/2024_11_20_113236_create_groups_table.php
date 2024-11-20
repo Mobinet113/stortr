@@ -9,14 +9,13 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::dropIfExists('spaces');
-        Schema::create('spaces', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('uid')->unique();
             $table->string('name');
-            $table->longText('description')->nullable();
-            $table->json('tags')->nullable();
+            $table->string('description')->nullable();
+            $table->json('users')->nullable(); // array of user ids and roles {id: 1, role: 'admin'}
         });
     }
 
@@ -24,6 +23,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('spaces');
+        Schema::dropIfExists('groups');
     }
 };

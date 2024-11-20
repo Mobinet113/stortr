@@ -11,8 +11,13 @@ import IconLamp from '@/Icons/Lamp';
 import IconLocation from '@/Icons/Location';
 import { useState } from 'react';
 import VisualButton from '../Common/VisualButton';
+import FormNewSpace from './FormNewSpace';
 
-export default function FormNewDevice() {
+interface FormNewDeviceProps {
+    onFinished?: () => void;
+}
+
+export default function FormNewDevice({ onFinished }: FormNewDeviceProps) {
     const [newDeviceType, setNewDeviceType] = useState(''); // space, location, item
 
     const iconClassname =
@@ -20,33 +25,42 @@ export default function FormNewDevice() {
 
     return (
         <div>
-            <div className="grid grid-cols-3 gap-2">
-                <VisualButton
-                    title="Space"
-                    onClick={() => setNewDeviceType('space')}
-                    icon={<IconLocation className={iconClassname} />}
-                >
-                    A space can be a room, or a section of a room.
-                </VisualButton>
+            {newDeviceType === '' && (
+                <div className="grid grid-cols-3 gap-2">
+                    <VisualButton
+                        title="Space"
+                        onClick={() => setNewDeviceType('space')}
+                        icon={<IconLocation className={iconClassname} />}
+                    >
+                        A space can be a room, or a section of a room.
+                    </VisualButton>
 
-                <VisualButton
-                    title="Location"
-                    onClick={() => setNewDeviceType('location')}
-                    icon={<IconDesk className={iconClassname} />}
-                >
-                    A location is an area within a space, like a shelf or a
-                    drawer.
-                </VisualButton>
+                    <VisualButton
+                        title="Location"
+                        onClick={() => setNewDeviceType('location')}
+                        icon={<IconDesk className={iconClassname} />}
+                    >
+                        A location is an area within a space, like a shelf or a
+                        drawer.
+                    </VisualButton>
 
-                <VisualButton
-                    title="Item"
-                    onClick={() => setNewDeviceType('item')}
-                    icon={<IconLamp className={iconClassname} />}
-                >
-                    An item is a physical object that can be found in a
-                    location.
-                </VisualButton>
-            </div>
+                    <VisualButton
+                        title="Item"
+                        onClick={() => setNewDeviceType('item')}
+                        icon={<IconLamp className={iconClassname} />}
+                    >
+                        An item is a physical object that can be found in a
+                        location.
+                    </VisualButton>
+                </div>
+            )}
+
+            {newDeviceType === 'space' && (
+                <FormNewSpace
+                    onBack={() => setNewDeviceType('')}
+                    onFinished={onFinished}
+                />
+            )}
         </div>
     );
 }

@@ -9,14 +9,11 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::dropIfExists('spaces');
-        Schema::create('spaces', function (Blueprint $table) {
+        Schema::create('group_relationships', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('group_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->longText('description')->nullable();
-            $table->json('tags')->nullable();
         });
     }
 
@@ -24,6 +21,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('spaces');
+        Schema::dropIfExists('group_relationships');
     }
 };

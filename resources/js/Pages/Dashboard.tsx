@@ -1,6 +1,7 @@
 import Button from '@/Components/Common/Button';
 import Frame from '@/Components/Common/Frame';
 import Modal from '@/Components/Common/Modal';
+import OverviewTable from '@/Components/Dashboard/OverviewTable';
 import FormNewDevice from '@/Components/Form/FormNewDevice';
 import Heading1 from '@/Components/Typography/Heading1';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
@@ -24,21 +25,24 @@ export default function Dashboard() {
             <Head title="Overview" />
 
             <Frame>
-                <Heading1>Overview</Heading1>
+                <div className="flex justify-between">
+                    <Heading1>Dashboard</Heading1>
 
-                <Button
-                    type="success"
-                    onClick={() =>
-                        setDeviceModal({ ...deviceModal, open: true })
-                    }
-                >
-                    Create new...
-                </Button>
+                    <Button
+                        type="success"
+                        onClick={() =>
+                            setDeviceModal({ ...deviceModal, open: true })
+                        }
+                    >
+                        Create new...
+                    </Button>
+                </div>
+
+                <OverviewTable />
             </Frame>
 
             <Modal
                 open={deviceModal.open}
-                title="Create a new..."
                 onClose={() => setDeviceModal({ ...deviceModal, open: false })}
             >
                 <FormNewDevice

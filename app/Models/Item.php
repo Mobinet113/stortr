@@ -3,11 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
-class Space extends Model {
-
+class Item extends Model {
     /**
      * The attributes that are mass assignable.
      *
@@ -16,8 +13,10 @@ class Space extends Model {
     protected $fillable = [
         'group_id',
         'user_id',
+        'location_id',
         'name',
         'description',
+        'tags',
     ];
 
     /**
@@ -28,8 +27,4 @@ class Space extends Model {
     protected $casts = [
         'tags' => 'array',
     ];
-
-    public function locations(): HasMany {
-        return $this->hasMany(Location::class);
-    }
 }

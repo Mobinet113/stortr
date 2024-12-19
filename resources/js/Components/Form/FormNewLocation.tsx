@@ -1,27 +1,30 @@
 import { useForm } from '@inertiajs/react';
 import { useState } from 'react';
 import Button from '../Common/Button';
+import SpaceSelect from '../Common/SpaceSelect';
 import Heading2 from '../Typography/Heading2';
 
 interface FormData {
+    space_id: number | null;
     name: string;
     description: string;
 }
 
-interface FormNewSpaceProps {
+interface FormNewLocationProps {
     onSubmit?: (data: FormData) => void;
     onBack?: () => void;
     onFinished?: (data: FormData) => void;
 }
 
-export default function FormNewSpace({
+export default function FormNewLocation({
     onSubmit,
     onBack,
     onFinished,
-}: FormNewSpaceProps) {
+}: FormNewLocationProps) {
     const [success, setSuccess] = useState(false);
 
     const { data, setData, post, processing, errors } = useForm({
+        space_id: null as number | null,
         name: '',
         description: '',
     });
@@ -29,9 +32,7 @@ export default function FormNewSpace({
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log(data);
-
-        post('spaces', {
+        post('locations', {
             preserveScroll: true,
             onSuccess: () => {
                 setSuccess(true);
@@ -52,9 +53,9 @@ export default function FormNewSpace({
     if (success) {
         return (
             <div>
-                <Heading2>Good stuff!</Heading2>
+                <Heading2>Nice one!</Heading2>
                 <p className="mt-3">
-                    Your space has been created successfully.
+                    Your location has been created successfully.
                 </p>
 
                 <div className="flex justify-end">
@@ -72,15 +73,19 @@ export default function FormNewSpace({
 
     return (
         <form onSubmit={handleSubmit}>
-            <Heading2>Create a new space</Heading2>
+            <Heading2>Create a new location</Heading2>
 
             <p className="-mt-3 font-extralight">
-                A space can be a room, or a section of a room.
+                A location is an area within a space, like a shelf or a drawer.
             </p>
 
             <div className="my-5">
+                <SpaceSelect onChange={(e) => setData('space_id', e)} />
+            </div>
+
+            <div className="my-5">
                 <label htmlFor="name" className="mb-2 block text-sm font-light">
-                    Name of the space (required)
+                    Name of the location (required)
                 </label>
                 <input
                     type="text"
@@ -101,7 +106,7 @@ export default function FormNewSpace({
                     htmlFor="description"
                     className="mb-2 block text-sm font-light"
                 >
-                    A brief description of the space
+                    A brief description of the location
                 </label>
                 <textarea
                     name="description"
@@ -121,7 +126,7 @@ export default function FormNewSpace({
                 </Button>
 
                 <Button type="success" disabled={processing}>
-                    Create space
+                    Create location
                 </Button>
             </div>
         </form>
